@@ -106,7 +106,7 @@ function createScene() {
   mat1.diffuseColor = new BABYLON.Color3(0, 0, 0)
   
   var netMat = new BABYLON.StandardMaterial('netMat', scene);
-  netMat.diffuseTexture = new BABYLON.Texture("asset/net_texture.png", scene);
+  netMat.diffuseTexture = new BABYLON.Texture("assets/net_texture.png", scene);
   netMat.diffuseTexture.hasAlpha = true;
   
 
@@ -370,7 +370,8 @@ function createScene() {
 
     // console.log("x: " + box.position.x + ", y: " + box.position.y + ", z: " + box.position.z);
 
-    if (ball.intersectsMesh(netBack, true) || ball.intersectsMesh(netBack2, true)) {
+    if (ball.intersectsMesh(netBack, true) || ball.intersectsMesh(netRight, true) || ball.intersectsMesh(netLeft, true) ||
+        ball.intersectsMesh(netBack2, true) || ball.intersectsMesh(netRight2, true) || ball.intersectsMesh(netLeft2, true)) {
       ball.physicsImpostor.sleep();
       ball.physicsImpostor.wakeUp();
     }

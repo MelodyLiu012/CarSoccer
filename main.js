@@ -107,7 +107,7 @@ function createScene() {
   
   var netMat = new BABYLON.StandardMaterial('netMat', scene);
   netMat.diffuseTexture = new BABYLON.Texture("asset/net_texture.png", scene);
-  netMat.hasAlpha = true;
+  netMat.diffuseTexture.hasAlpha = true;
   
 
   // goalpost 1

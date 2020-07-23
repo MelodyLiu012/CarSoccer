@@ -13,9 +13,12 @@ function createScene() {
   // Meshes---------------------------------------------------------
 
   // Room
-  var roomWidth = 121;
-  var roomLength = 220;
+  var roomWidth = 200;
+  var roomLength = 300;
   var roomHeight = 100;
+
+  var fieldWidth = 121;
+  var fieldLength = 200;
 
   var ground = BABYLON.MeshBuilder.CreateGround("ground", {width: roomWidth, height: roomLength}, scene);
   material = new BABYLON.StandardMaterial("material", scene);
@@ -35,6 +38,17 @@ function createScene() {
 
   var backWall = BABYLON.MeshBuilder.CreatePlane("backWall", {width: roomWidth, height: roomHeight, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
   backWall.position = new BABYLON.Vector3(0, roomHeight/2, roomLength/2);
+
+  var gl = new BABYLON.GlowLayer("glow", scene);
+
+  var field = new BABYLON.MeshBuilder.CreateGround("field", {width: fieldWidth, height: fieldLength}, scene);
+  fieldMaterial = new BABYLON.StandardMaterial("fieldMaterial", scene);
+  fieldMaterial.emmissiveColor = new BABYLON.Color3(1, 1, 1);
+  fieldMaterial.diffuseTexture = new BABYLON.Texture("assets/soccer_field.png", scene);
+  fieldMaterial.diffuseTexture.hasAlpha = true;
+  field.material = fieldMaterial;
+  field.position.y = 0.1;
+  
   
   
   // Robot
@@ -108,6 +122,9 @@ function createScene() {
   var netMat = new BABYLON.StandardMaterial('netMat', scene);
   netMat.diffuseTexture = new BABYLON.Texture("assets/net_texture.png", scene);
   netMat.diffuseTexture.hasAlpha = true;
+
+  var areaMat = new BABYLON.StandardMaterial('areaMat', scene);
+  areaMat.alpha = 0;
   
 
   // goalpost 1
@@ -158,8 +175,11 @@ function createScene() {
   netBack.material = netMat;
   netBack.parent = base;
 
-  base.position = new BABYLON.Vector3(0, barSize/2 + 1, roomLength/2 - 20);
+  base.position = new BABYLON.Vector3(0, barSize/2 + 1, fieldLength/2 + goalLength);
 
+  var goalArea1 = new BABYLON.MeshBuilder.CreateGround("goalArea1", {width: goalWidth, height: goalLength}, scene);
+  goalArea1.position = new BABYLON.Vector3(0, 0.1, fieldLength/2 + goalLength/2);
+  goalArea1.material = areaMat;
   
 
   // goalpost 2
@@ -210,10 +230,12 @@ function createScene() {
   netBack2.material = netMat;
   netBack2.parent = base2;
   
-  base2.position = new BABYLON.Vector3(0, barSize/2 + 1, -roomLength/2 + 20);
+  base2.position = new BABYLON.Vector3(0, barSize/2 + 1, -fieldLength/2 - goalLength);
   base2.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
 
-
+  var goalArea2 = new BABYLON.MeshBuilder.CreateGround("goalArea1", {width: goalWidth, height: goalLength}, scene);
+  goalArea2.position = new BABYLON.Vector3(0, 0.1, -fieldLength/2 - goalLength/2);
+  goalArea2.material = areaMat;
 
 
   // Lighting and Shadows---------------------------------------------------------
@@ -274,9 +296,6 @@ function createScene() {
   box.physicsImpostor = new BABYLON.PhysicsImpostor(box, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 10, friction: 0.5, restitution: 0.0 }, scene);
   
   var goal1Components = [netRight, netLeft, netBack, hbar, vbar1, vbar2, c1, c2, base];
-  for (var i = 0; i < 3; i++) {
-    goal1Components[i].enab
-  }
   for (var i = 3; i < goal1Components.length; i++) {
     goal1Components[i].physicsImpostor = new BABYLON.PhysicsImpostor(goal1Components[i], BABYLON.PhysicsImpostor.BoxImpostor, { mass: 2000, friction: 10000, restitution: 0 }, scene);
   }
@@ -351,29 +370,34 @@ function createScene() {
       box.translate(BABYLON.Axis.Z, -0.3, BABYLON.Space.LOCAL);
     }
 
+
     // Scoring a goal 
-
-    // if ball is inside goal, add score
-    // if ( 
-    //       (ball.position.x > (base.position.x - goalWidth/2)) && (ball.position.x < (base.position.x + goalWidth/2)) &&
-    //       (ball.position.z > (base.position.z - goalLength)) && (ball.position.z < base.position) 
-    //    )
-    // {
-    //   console.log("goal1");
-      
-    // }
-    // if ( (ball.position.x > (base2.position.x - goalWidth/2)) && (ball.position.x < (base2.position.x + goalWidth/2)) &&
-    //      (ball.position.z < (base2.position.z + goalLength)) && (ball.position.z > base2.position) )
-    // {
-    //   console.log("goal2");
-    // }
-
-    // console.log("x: " + box.position.x + ", y: " + box.position.y + ", z: " + box.position.z);
 
     if (ball.intersectsMesh(netBack, true) || ball.intersectsMesh(netRight, true) || ball.intersectsMesh(netLeft, true) ||
         ball.intersectsMesh(netBack2, true) || ball.intersectsMesh(netRight2, true) || ball.intersectsMesh(netLeft2, true)) {
       ball.physicsImpostor.sleep();
       ball.physicsImpostor.wakeUp();
+      
+      if (!recordedScore) { 
+        score++; 
+        recordedScore = true;
+        console.log(score);
+      }
+
+      ball.position = new BABYLON.Vector3(0, 4, 0);
+    }
+    else {
+      recordedScore = false;
+    }
+
+    // When ball is out of bounds, put it back at center of field
+
+    if (!(ball.intersectsMesh(field, true) || ball.intersectsMesh(goalArea1, true) || ball.intersectsMesh(goalArea2, true)) && 
+          ball.position.y <= 1.5 )
+    {
+      ball.physicsImpostor.sleep();
+      ball.physicsImpostor.wakeUp();
+      ball.position = new BABYLON.Vector3(0, 4, 0);
     }
 
   });

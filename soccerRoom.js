@@ -348,7 +348,7 @@ function createScene() {
   rightButton.top = buttonSetY +"px";
   rightButton.width = buttonSize + "px";
   rightButton.height = buttonSize + "px";
-  rightButton.thickness = "0px";
+  rightButton.thickness = "1px";
   advancedTexture.addControl(rightButton);
 
   //Left Button
@@ -360,7 +360,7 @@ function createScene() {
   leftButton.top = buttonSetY + "px";
   leftButton.width = buttonSize + "px";
   leftButton.height = buttonSize + "px";
-  leftButton.thickness = "0px";
+  leftButton.thickness = "1px";
   advancedTexture.addControl(leftButton);
 
   //Up Arrow
@@ -372,7 +372,7 @@ function createScene() {
   upButton.top = buttonSetY - buttonSize + "px";
   upButton.width = buttonSize + "px";
   upButton.height = buttonSize + "px";
-  upButton.thickness = "0px";
+  upButton.thickness = "1px";
   advancedTexture.addControl(upButton);
 
   //Down Arrow
@@ -384,7 +384,7 @@ function createScene() {
   downButton.top = buttonSetY + buttonSize + "px";
   downButton.width = buttonSize + "px";
   downButton.height = buttonSize + "px";
-  downButton.thickness = "0px";
+  downButton.thickness = "1px";
   advancedTexture.addControl(downButton);
 
   var winText = new BABYLON.GUI.TextBlock();

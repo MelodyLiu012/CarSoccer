@@ -24,6 +24,7 @@
         color: aliceblue;
         font-family: "Recursive";
         font-size: 25px;
+        margin-right: 4%;
       }
       .button {
         padding: 5px 10px 5px 10px;
@@ -36,12 +37,11 @@
         text-shadow: 5px 0px 50px #FFFFFF;
         /* border: 1px solid aliceblue; */
       }
-
       .button:hover {
         transition: 0.5s;
         background-color: aliceblue;
         color: black;
-      }
+}
       #UIBar p {
         padding-top: 10px;
         margin: 0;
@@ -50,19 +50,24 @@
         font-size: 12px;
         float: right;
       }
-      .switcher{
-        padding-left: 30px;
+      #canvasRight {
+        float: right;
+      }
+      canvas {
+        margin: -0px -4px -4px -4px;
       }
     </style>
   </head>
   <body>
     <div id="UIBar">
-      <h4 id="title">Practice Room</h4>
-      <a href="practiceRoom.html" class="button">START/RESTART</a>
-      <a href="soccerRoom.html" class="button">Go TO MAIN ROOM</a>
+      <h3 id="title">Speed Soccer</h3>
+      <a href="soccerRoom.html" class="button">START/RESTART</a>
+      <a href="practiceRoom.html" class="button">GO TO PRACTICE ROOM</a>
       <p>scroll down to hide this bar</p>
     </div>
-    <canvas id="canvas"></canvas>
-    <script src="practiceRoom.js"></script>
+    <!-- <canvas id="canvasLeft"></canvas> -->
+    <canvas id="canvasRight"></canvas>
+    <!-- <canvas id="canvas"></canvas> -->
+    <script src="soccerRoom.js"></script>
   </body>
 </html>

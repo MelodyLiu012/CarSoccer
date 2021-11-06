@@ -496,7 +496,7 @@ function createScene() {
   winText.fontSize = 50;
   winText.fontFamily = "monospace";
   winText.isVisible = false;
-  advancedTexture.addControl(winText); 
+  advancedTexture.addControl(winText);
 
 // /*var plane2 = BABYLON.Mesh.CreatePlane("plane",2);
 //   plane.parent = box;
@@ -594,7 +594,7 @@ function createScene() {
     // Game over after either score or score2 is 5
 
     if (score < 5 && score2 < 5) {
-      
+
       // Robot Movement
       if (keysPressed["a"]) { // A, left
         resetBoxPhysics();
@@ -608,13 +608,13 @@ function createScene() {
         resetBoxPhysics();
         box.translate(BABYLON.Axis.Z, 0.3, BABYLON.Space.LOCAL);
       }
-      if (keysPressed["w"] || buttonsPressed["up"]) {  // W, forward
+      if (keysPressed["w"]) {  // W, forward
         resetBoxPhysics();
         box.translate(BABYLON.Axis.Z, -0.3, BABYLON.Space.LOCAL);
       }
 
       // Robot2 Movement
-      if (keysPressed["j"]) { // A, left
+      if (keysPressed["j"] || buttonsPressed["left"]) { // A, left
         resetBoxPhysics();
         box2.rotate(BABYLON.Axis.Y, -0.05, BABYLON.Space.LOCAL);
       }
@@ -630,6 +630,45 @@ function createScene() {
         resetBoxPhysics();
         box2.translate(BABYLON.Axis.Z, -0.3, BABYLON.Space.LOCAL);
       }
+
+
+      //ScoreBoard
+      var scoreboard = BABYLON.MeshBuilder.CreatePlane("ground1", {width: 18, height: 10}, scene);
+      scoreboard.position = new BABYLON.Vector3(20, 30, 40);
+  	var scoreTexture = new BABYLON.DynamicTexture("dynamic texture",
+      {
+          width: 512,
+          height: 256,
+          sideOrientation: BABYLON.Mesh.DOUBLESIDE
+      },
+      scene);
+  	var scoreMat = new BABYLON.StandardMaterial("scoreMat", scene);
+  	scoreMat.diffuseTexture = scoreTexture;
+  	scoreboard.material = scoreMat;
+      var font = "bold 44px monospace";
+      scoreTexture.drawText("Red: "+score2+" Blue: "+score, 95, 105, font, "green", "white", true, true);
+
+
+      //ScoreBoard2
+      var scoreboard2 = BABYLON.MeshBuilder.CreatePlane("ground2", {width: 18, height: 10}, scene);
+      scoreboard2.position = new BABYLON.Vector3(-20, 30, -40);
+      scoreboard2.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
+  	var scoreTexture2 = new BABYLON.DynamicTexture("dynamic texture",
+      {
+          width: 512,
+          height: 256,
+          sideOrientation: BABYLON.Mesh.DOUBLESIDE
+      },
+      scene);
+  	var scoreMat2 = new BABYLON.StandardMaterial("scoreMat", scene);
+  	scoreMat2.diffuseTexture = scoreTexture2;
+  	scoreboard2.material = scoreMat2;
+      var font = "bold 44px monospace";
+      scoreTexture2.drawText("Red: "+score2+" Blue: "+score, 95, 105, font, "green", "white", true, true);
+      //scoreTexture2.drawText("Team1", 105, 55, font, "green", "white", true, true);
+
+
+
 
 
       // Scoring a goal
@@ -678,7 +717,7 @@ function createScene() {
       if (score2 >= 5) {
         winText.text = "Red Wins";
       }
-      else { 
+      else {
         winText.text = "Blue Wins"
       }
       winText.isVisible = true;

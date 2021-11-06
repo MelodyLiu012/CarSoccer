@@ -95,6 +95,18 @@ function createScene() {
   ball.material = ballMaterial;
   ball.position = new BABYLON.Vector3(0, 6,  20);
 
+  var ball2 = BABYLON.MeshBuilder.CreateSphere("Ball", {diameter: 3}, scene);
+  ballMaterial.diffuseTexture = new BABYLON.Texture("assets/soccer_texture.jpg", scene);
+  ballMaterial.bumpTexture = new BABYLON.Texture("assets/soccer_normal.png", scene);
+  ball2.material = ballMaterial;
+  ball2.position = new BABYLON.Vector3(0, 8,  20);
+  
+  
+  var ball3 = BABYLON.MeshBuilder.CreateSphere("Ball", {diameter: 3}, scene);
+  ballMaterial.diffuseTexture = new BABYLON.Texture("assets/soccer_texture.jpg", scene);
+  ballMaterial.bumpTexture = new BABYLON.Texture("assets/soccer_normal.png", scene);
+  ball3.material = ballMaterial;
+  ball3.position = new BABYLON.Vector3(0, 4,  20);
 
   // Goalposts
 
@@ -216,6 +228,8 @@ function createScene() {
   scene.enablePhysics(null, new BABYLON.CannonJSPlugin());
 
   ball.physicsImpostor = new BABYLON.PhysicsImpostor(ball, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 2, friction: 0.7, restitution: 0.3 }, scene);
+  ball2.physicsImpostor = new BABYLON.PhysicsImpostor(ball2, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 2, friction: 0.7, restitution: 0.3 }, scene);
+  ball3.physicsImpostor = new BABYLON.PhysicsImpostor(ball3, BABYLON.PhysicsImpostor.SphereImpostor, { mass: 2, friction: 0.7, restitution: 0.3 }, scene);
   ground.physicsImpostor = new BABYLON.PhysicsImpostor(ground, BABYLON.PhysicsImpostor.BoxImpostor, { mass: 0, friction: 0.2, restitution: 0.7 }, scene);
 
   frontRightWheel.physicsImpostor = new BABYLON.PhysicsImpostor(frontRightWheel, BABYLON.PhysicsImpostor.CylinderImpostor, { mass: 1, friction: 0.1, restitution: 0.0 }, scene);

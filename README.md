@@ -1,2 +1,2 @@
 # RobotSim
-created using outdated version of babylon.js and no longer works :(
+A 3D 2-player split-screen soccer game on the browser, made with Babylon.js

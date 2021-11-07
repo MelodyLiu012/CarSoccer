@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Robot Simulator</title>
+    <script src="./dependencies/babylon.js"></script>
+    <script src="./dependencies/babylon.gui.min.js"></script>
+    <script src="./dependencies/cannon.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Recursive:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        background-color: black;
+      }
+      #UIBar {
+        background-color: black;
+        padding: 10px 15px 10px 15px;
+        margin: 0 0 0 0;
+      }
+      #title {
+        display: inline;
+        color: aliceblue;
+        font-family: "Recursive";
+        font-size: 25px;
+        margin-right: 4%;
+      }
+      .button {
+        padding: 5px 10px 5px 10px;
+        margin-right: 4%;
+        margin-left: 4%;
+        font-family: "Recursive", sans-serif;
+        letter-spacing: 1px;
+        text-decoration: none;
+        color: aliceblue;
+        text-shadow: 5px 0px 50px #FFFFFF;
+        /* border: 1px solid aliceblue; */
+      }
+      .button:hover {
+        transition: 0.5s;
+        background-color: aliceblue;
+        color: black;
+}
+      #UIBar p {
+        padding-top: 10px;
+        margin: 0;
+        color: rgb(207, 207, 207);
+        font-family: "Recursive", sans-serif;
+        font-size: 12px;
+        float: right;
+      }
+      #instructions
+      {
+        padding: 5vw;
+        background-color: black;
+        font-family: "Recursive", sans-serif;
+        color: aliceblue;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="UIBar">
+      <h3 id="title">How to Play</h3>
+      <a href="index.html" class="button">START/RESTART</a>
+      <a href="practiceRoom.html" class="button">GO TO PRACTICE ROOM</a>
+      <a href="howToPlay.html" class="button">HOW TO PLAY</a>
+      <p>scroll down to hide this bar</p>
+    </div>
+    <div id="instructions">
+        This is a 2-player split-screen soccer game.
+        <ul>
+            <li><b>W A S D</b> or on-screen HUD to control the red robot.</li>
+            <li><b>J K L I</b> or on-screen HUD to control the blue robot.</li>
+        </ul>
+        Camera angle and zoom can be controlled with the mouse.
+
+        The first player to get the ball into the enemy's goal 5 times wins the game.
+    </div>
+  </body>
+</html>

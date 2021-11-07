@@ -634,38 +634,36 @@ function createScene() {
 
       //ScoreBoard
       var scoreboard = BABYLON.MeshBuilder.CreatePlane("ground1", {width: 18, height: 10}, scene);
-      scoreboard.position = new BABYLON.Vector3(20, 30, 40);
-  	var scoreTexture = new BABYLON.DynamicTexture("dynamic texture",
+      scoreboard.position = new BABYLON.Vector3(0, 30, 100);
+  	  var scoreTexture = new BABYLON.DynamicTexture("dynamic texture",
       {
           width: 512,
           height: 256,
           sideOrientation: BABYLON.Mesh.DOUBLESIDE
       },
       scene);
-  	var scoreMat = new BABYLON.StandardMaterial("scoreMat", scene);
-  	scoreMat.diffuseTexture = scoreTexture;
-  	scoreboard.material = scoreMat;
-      var font = "bold 44px monospace";
-      scoreTexture.drawText("Red: "+score2+" Blue: "+score, 95, 105, font, "green", "white", true, true);
-
+      var scoreMat = new BABYLON.StandardMaterial("scoreMat", scene);
+      scoreMat.diffuseTexture = scoreTexture;
+      scoreboard.material = scoreMat;
+      var font = "bold 40px monospace";
+      scoreTexture.drawText("Red: " +score2 + " Blue: "+score, 95, 105, font, "green", "white", true, true);
 
       //ScoreBoard2
       var scoreboard2 = BABYLON.MeshBuilder.CreatePlane("ground2", {width: 18, height: 10}, scene);
-      scoreboard2.position = new BABYLON.Vector3(-20, 30, -40);
+      scoreboard2.position = new BABYLON.Vector3(0, 30, -100);
       scoreboard2.rotate(BABYLON.Axis.Y, Math.PI, BABYLON.Space.WORLD);
-  	var scoreTexture2 = new BABYLON.DynamicTexture("dynamic texture",
+  	  var scoreTexture2 = new BABYLON.DynamicTexture("dynamic texture",
       {
           width: 512,
           height: 256,
           sideOrientation: BABYLON.Mesh.DOUBLESIDE
       },
       scene);
-  	var scoreMat2 = new BABYLON.StandardMaterial("scoreMat", scene);
-  	scoreMat2.diffuseTexture = scoreTexture2;
-  	scoreboard2.material = scoreMat2;
-      var font = "bold 44px monospace";
+      var scoreMat2 = new BABYLON.StandardMaterial("scoreMat", scene);
+      scoreMat2.diffuseTexture = scoreTexture2;
+      scoreboard2.material = scoreMat2;
+
       scoreTexture2.drawText("Red: "+score2+" Blue: "+score, 95, 105, font, "green", "white", true, true);
-      //scoreTexture2.drawText("Team1", 105, 55, font, "green", "white", true, true);
 
 
 
